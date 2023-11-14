@@ -2,16 +2,24 @@
 -- query should return exactly three columns - calendar_month, buy_qunatity,
 -- sell_quantity
 
-select
-	EXTRACT(MONTH FROM market_date::DATE) calender_month,
-	SUM(CASE WHEN price >= open THEN REGEXP_REPLACE(volume, '[^0-9.]', '', 'g')::NUMERIC ELSE 0 END) buy_quantity,
-	SUM(CASE WHERE price < open THEN REGEXP_REPLACE(volume, '[^0-9.]', '', 'g')::NUMERIC ELSE 0 END) sell_quantity
+SELECT
+	EXTRACT(MONTH FROM txn_date::DATE) AS calendar_month,
+	SUM(CASE
+			WHEN txn_type = 'BUY'
+			THEN quantity ELSE 0
+		END
+	) AS buy_quantity,
+	SUM(CASE
+			WHEN txn_type = 'SELL'
+			THEN quantity ELSE 0
+		END
+	) AS sell_quantity
 FROM
-	raw.prices
+	raw.transactions
 WHERE
 	ticker = 'ETH'
-	AND EXTRACT(YEAR FROM market_date::DATE) = 2020
+	AND EXTRACT(YEAR FROM txn_date::DATE) = 2020
 GROUP BY
-	calender_month
-ORDER By
-   calender_month;
+	calendar_month
+ORDER BY
+	calendar_month;

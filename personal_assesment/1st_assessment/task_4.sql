@@ -8,7 +8,7 @@ SELECT
 FROM
 	raw.members
 JOIN
-	raw.transactions on members.member_id = transactions.member_id
+	raw.transactions ON members.member_id = transactions.member_id
 WHERE
 	ticker = 'BTC'
 GROUP BY

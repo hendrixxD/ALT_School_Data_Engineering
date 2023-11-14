@@ -3,73 +3,76 @@ author: devhendrixx@gmail.com
 """
 
 question_one = """
-SELECT 
-	EXTRACT(YEAR FROM txn_date::DATE) txn_year,
+
+SELECT
 	txn_type,
-	COUNT(*) txn_count,
-	SUM(quantity) total_quantity,
-	AVG(quantity) average_quantity
+	COUNT(quantity) AS transaction_count
 FROM
 	raw.transactions
 WHERE
 	ticker = 'BTC'
-GROUP BY txn_year, txn_type;
-ORDER BY txn_year, txn_type;
+GROUP BY
+	txn_type;
+
 """
 
 
 question_two = """
 SELECT 
-	EXTRACT(YEAR from txn_date::date) txn_year,
+	EXTRACT(YEAR FROM txn_date::DATE) AS txn_year,
 	txn_type,
-	COUNT(*) txn_count,
-	SUM(quantity) total_quantity,
-	AVG(quantity) average_quantity
+	COUNT(*) AS txn_count,
+	SUM(quantity) AS total_quantity,
+	AVG(quantity) AS average_quantity
 FROM
 	raw.transactions
 WHERE
 	ticker = 'BTC'
 GROUP BY
+	txn_year, txn_type
+ORDER BY
 	txn_year, txn_type;
-ORDER
-	BY txn_year, txn_type;
 """
 
 
 question_three = """
 SELECT
-	EXTRACT(
-     	MONTH FROM market_date::DATE) calender_month,
-	SUM(
-     	CASE WHEN price >= open THEN REGEXP_REPLACE(volume, '[^0-9.]', '', 'g')::NUMERIC ELSE 0 END) buy_quantity,
-	SUM(
-     	CASE WHEN price < open THEN REGEXP_REPLACE(volume, '[^0-9.]', '', 'g')::NUMERIC ELSE 0 END) sell_quantity
+	EXTRACT(MONTH FROM txn_date::DATE) AS calendar_month,
+	SUM(CASE
+			WHEN txn_type = 'BUY'
+			THEN quantity ELSE 0
+		END
+	) AS buy_quantity,
+	SUM(CASE
+			WHEN txn_type = 'SELL'
+			THEN quantity ELSE 0
+		END
+	) AS sell_quantity
 FROM
-	raw.prices
+	raw.transactions
 WHERE
 	ticker = 'ETH'
-	AND EXTRACT(
-     	YEAR FROM market_date::DATE) = 2020
+	AND EXTRACT(YEAR FROM txn_date::DATE) = 2020
 GROUP BY
-	calender_month
-ORDER By
-   calender_month;
+	calendar_month
+ORDER BY
+	calendar_month;
 """
 
 
 question_four = """
 SELECT
 	first_name,
-	SUM(quantity) total_quantity
+	SUM(quantity) AS total_quantity
 FROM
 	raw.members
 JOIN
-	raw.transactions on members.member_id = transactions.member_id
+	raw.transactions ON members.member_id = transactions.member_id
 WHERE
 	ticker = 'BTC'
 GROUP BY
 	first_name
 ORDER BY
-	total_quantity desc
+	total_quantity DESC
 LIMIT 3;
 """

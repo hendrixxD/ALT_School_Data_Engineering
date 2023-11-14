@@ -1,21 +1,12 @@
-
--- CREATE a user `cryptoverse_admin` with CREATEDB and CREATEROLE attributes
-
--- CREATE USER cryptoverse_admin WITH CREATEDB CREATEROLE ENCRYPTED PASSWORD 'admin';
--- CREATE DATABASE metaverse;
--- SET role cryptoverse_admin;
+-- How many buy and sell transactions are there for Bitcoin? - 
+-- your result should return two columns - txn_type, transaction_count
 
 SELECT
-	first_name,
-	SUM(quantity) total_quantity
+	txn_type,
+	COUNT(quantity) AS transaction_count
 FROM
-	raw.members
-JOIN
-	raw.transactions on members.member_id = transactions.member_id
+	raw.transactions
 WHERE
 	ticker = 'BTC'
 GROUP BY
-	first_name
-ORDER BY
-	total_quantity desc
-LIMIT 3;
+	txn_type;
