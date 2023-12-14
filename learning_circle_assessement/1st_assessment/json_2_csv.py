@@ -1,3 +1,5 @@
+"""processes json files to csv files
+"""
 import os
 import csv
 import json
@@ -30,11 +32,11 @@ def process_json_to_csv(json_folder, csv_filename, data_key, json_fields):
             sys.stdout.write(f"Progress: {idx}/{total_files} files processed")
             sys.stdout.flush()
 
-            # Add a small delay for demonstration purposes
             time.sleep(0.1)
 
         end_time = time.time()
         processing_time = end_time - start_time
+        
         # Print newline to move to the next line after completion
         print("\nCSV files generated successfully.")
         print(f"Total processing time: {processing_time:.2f} seconds")
@@ -43,7 +45,7 @@ def process_json_to_csv(json_folder, csv_filename, data_key, json_fields):
 users_json_folder = '/home/hendrixxdiddy/DEV/ALT_School_Data_Engineering/learning_circle_assessement/1st_assessment/events/users'
 cards_json_folder = '/home/hendrixxdiddy/DEV/ALT_School_Data_Engineering/learning_circle_assessement/1st_assessment/events/cards'
 
-# Specify JSON field names for users and cards
+# JSON field names for users and cards
 users_fields = ['id', 'name', 'address', 'job', 'score', 'type', 'event_at', 'event_id']
 cards_fields = ['id', 'user_id', 'created_by_name', 'updated_at', 'created_at', 'active', 'type', 'event_at', 'event_id']
 
