@@ -1,0 +1,93 @@
+# Samples adding an expense to a database
+    try:
+        for _ in range(30):
+            title, amount = generate_fake_expense()
+            exp = exp_db.add_expense(title=title, amount=f"{amount:.2f}")
+            print(exp)
+    except Exception as err:
+        print(f"{err}")
+    finally:
+        print("connection closed")
+
+
+    # Samples the remomal of 50 expense id from the database
+    try:
+        cur.execute(
+            """
+            SELECT id
+            FROM exams.expense
+            LIMIT 50
+            OFFSET 10
+            """
+            )
+    
+        expense_id = cur.fetchall()
+        cur.connection.close()    
+        # print(expense_id)
+
+        for exp in expense_id:
+            expense_id=exp
+            exp_db.remove_expense(expense_id=exp)
+            print(f"{exp} removed successfully")
+    except Exception as e:
+        print(f"{exp}")
+
+
+# Sample retrieving and expense by id
+    try:
+        cur.execute(
+            """
+            SELECT id
+            FROM exams.expense
+            LIMIT 1;
+            """
+            )
+    
+        expense_by_id = cur.fetchall()
+        cur.connection.close()
+
+        for exp_id in expense_by_id:
+            exp_db.get_expense_by_id(expense_id=exp_id)
+            
+    except Exception as e:
+        print(f"{e}")
+
+
+# Sample retrieving and expenses by title
+    try:
+        cur.execute(
+            """
+            SELECT title
+            FROM exams.expense
+            LIMIT 2
+            """
+            )
+
+        expenses_by_title = cur.fetchall()
+        cur.connection.close()
+
+        for exp_title in expenses_by_title:
+            exp_db.get_expense_by_title(expense_title=exp_title)
+            
+    except Exception as e:
+        print(f"{e}")
+
+
+
+
+
+
+
+
+ while True:
+        choice = str(input("Enter a choice between 1 and 4: "))
+
+        try:
+            if 1 <= int(choice) <= 4:
+                return int(choice)
+            elif choice == str(4):
+                return None
+            else:
+                print("Invalid choice. Please enter a number between 1 and 4.")
+        except ValueError:
+            print("Invalid input. Please enter a valid integer.")

@@ -1,12 +1,18 @@
 #!/usr/bin/env python
 
 """
-A distinct representation of a financial expense
+A distinct representation and a collection of financial expenses
 """
 
+import os
 import uuid
-from datetime import datetime, timezone
+import psycopg
 from typing import List, Dict
+from dotenv import load_dotenv
+from datetime import datetime, timezone
+
+# load environment variables
+load_dotenv()
 
 class Expense:
     """creates and expense object
@@ -25,7 +31,8 @@ class Expense:
         self.id = str(uuid.uuid4())
         self.title = title
         self.amount = amount
-        self.created_at = self.updated_at = self._timestamp()      
+        self.created_at = self._timestamp().isoformat()
+        self.updated_at = self._timestamp().isoformat()
     
     def update(self, title=None, amount=None):
         """
@@ -44,7 +51,7 @@ class Expense:
     def to_dict(self) -> Dict:
         """Returns a dictionary representation of the expense
         """
-        return {
+        expense_dict = {
             'id': self.id,
             'title': self.title,
             'amount': self.amount,
@@ -52,12 +59,14 @@ class Expense:
             'updated_at': str(self.updated_at)
         }
         
-         
+        return expense_dict
+        
+
     def _timestamp(self):
         """returns the timestamp when called
 
         Returns:
             timestamp: returns as a timezone-aware timestamp
         """
-        return datetime.utcnow().astimezone()
-        
+        # return datetime.utcnow().astimezone()
+        return datetime.now(timezone.utc)
