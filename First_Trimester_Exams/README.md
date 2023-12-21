@@ -1,7 +1,7 @@
 # Fall Semester Data Engineering Exams
 
 ## Synopsis
- The achieving goal of this project is to put to test and validate the knowledge OOP which we have ingested through out the the semester by implementing a class that models and manages financial expenses.
+ The achieving goal of this project is to put to test and validate the knowledge OOP which we have ingested through out the the semester by implementing two classes that models and manages financial expenses.
 
 ## Classes
 
