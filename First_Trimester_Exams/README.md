@@ -53,23 +53,25 @@
 - Step 3
  Next, you activate the virtual environment
 
-  ```bash```
+  ```bash
   source ./env/bin/activate
+  ```
 
 - Step 4
  Now that you have your virtual environment installed, Install the dependencies
 
-  ```bash
+  ```python
   pip3 install -r requirments.txt
   ```
 - Step 5
 
- create a .env file where you define your environment variables for postgres
+ Create a `.env` file where you define your environment variables for postgres
 
   ```python
   touch .env
 
- And put the following lines in it
+- Step 6
+ Put the following lines in it
 
   ```python
   host={host}                # this by default should be `localhost`
@@ -78,13 +80,14 @@
   user={user}                # the name of the user/role
   password={password}        # user/roles passcode
   ```
-
+ 
  A sample look of how your .env file should look like
 
-  ![.env](./img/_env.png)
+  ![.env](./img/_env.png ".env file")
 
- Surposedly you have created a role with a password and a database, with a shema('exams'). you can now go ahead to test your connection.
- Now that you have your virtual environment installed, Install the dependencies
+- Step 7
+ Now you have created a role with a password and a database, with a schema('exams'). you can now go ahead to test your connection.
+
  To test your database connection, run the script `test_conn.py`
 
    ```python
