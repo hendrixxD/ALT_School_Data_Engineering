@@ -5,6 +5,5 @@ time.py
 try_time.py
 ExpenseDatabase.py
 Psycopg3
-__pycache__.*
-test_conn.py
+.*/__pycache__
 inputs.py
