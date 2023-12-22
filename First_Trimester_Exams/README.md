@@ -61,7 +61,7 @@
 
   ```bash
   pip3 install -r requirments.txt
-
+  ```
 - Step 5
 
  create a .env file where you define your environment variables for postgres
@@ -77,6 +77,7 @@
   dbname={name_of_database}  # the name of the database
   user={user}                # the name of the user/role
   password={password}        # user/roles passcode
+  ```
 
  A sample look of how your .env file should look like
 
