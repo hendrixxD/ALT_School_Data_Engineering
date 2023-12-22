@@ -16,9 +16,9 @@
    5. updated_at: A timestamp indicating the last time the expense was updated (UTC).
     
   Methods:
-   1. __init__: Initializes the attributes.
-   2. update: Allows updating the title and/or amount, updating the updated_at timestamp.
-   3. to_dict: Returns a dictionary representation of the expense.
+   1. `__init__`: Initializes the attributes.
+   2. `update`: Allows updating the title and/or amount, updating the updated_at timestamp.
+   3. `to_dict`: Returns a dictionary representation of the expense.
  
  
  ### ExpenseDB class
@@ -28,29 +28,33 @@
    1. expenses: A list storing Expense instances.
   
   Methods:
-   1. __init__: Initializes the list.
-   2. add_expense: Adds an expense.
-   3. remove_expense: Removes an expense.
-   4. get_expense_by_id: Retrieves an expense by ID.
-   5. get_expense_by_title: Retrieves expenses by title.
-   6. to_dict: Returns a list of dictionaries representing expenses.
+   1. `__init__`: Initializes the list.
+   2. `add_expense`: Adds an expense.
+   3. `remove_expense`: Removes an expense.
+   4. `get_expense_by_id`: Retrieves an expense by ID.
+   5. `get_expense_by_title`: Retrieves expenses by title.
+   6. `to_dict`: Returns a list of dictionaries representing expenses.
 
 ## How To Clone
- To clone this repository code, copy and paste the code below. i use ssh, so i am clicking on ssh then C@P the url in step1 below
+ To clone this repository code, navigate to the root directory and click on `code`.
+ I use ssh, so i am clicking on ssh then C@P the url as shown in step1 below
+
   ![clone](./img/clone.png)
 
 - Step 1
 
   ```python
-  git clone git@github.com:hendrixxD/ALT_School_Data_Engineering.git
+  git clone {url}
 
 - Step 2
+
  Next we create and activate a virtual environment to install all the dependencies
 
   ```python
   python3 -m venv env
 
 - Step 3
+
  Next, you activate the virtual environment
 
   ```bash
@@ -58,19 +62,23 @@
   ```
 
 - Step 4
+
  Now that you have your virtual environment installed, Install the dependencies
 
   ```python
   pip3 install -r requirments.txt
   ```
+
 - Step 5
 
  Create a `.env` file where you define your environment variables for postgres
 
   ```python
   touch .env
+  ```
 
 - Step 6
+
  Put the following lines in it
 
   ```python
@@ -81,17 +89,19 @@
   password={password}        # user/roles passcode
   ```
  
- A sample look of how your .env file should look like
+A sample look of how your `.env` file should look like
 
-  ![.env](./img/_env.png ".env file")
+ ![.env](./img/_env.png ".env file")
 
 - Step 7
+
  Now you have created a role with a password and a database, with a schema('exams'). you can now go ahead to test your connection.
 
  To test your database connection, run the script `test_conn.py`
 
-   ```python
-   python3 test_conn.py
+  ```python
+  python3 test_conn.py
+  ```
 
 Congratullations!!! Now that a connection is established, lets deep dive into the code.
 
