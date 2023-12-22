@@ -36,7 +36,7 @@
    6. to_dict: Returns a list of dictionaries representing expenses.
 
 ## How To Clone
- To clone this repository code, copy and paste the code below. i use ssh, so i am clicking on ssh then C@P the url below
+ To clone this repository code, copy and paste the code below. i use ssh, so i am clicking on ssh then C@P the url in step1 below
   ![clone](./img/clone.png)
 
 - Step 1
@@ -48,19 +48,21 @@
  Next we create and activate a virtual environment to install all the dependencies
 
   ```python
-  python3 venv -m env
+  python3 -m venv env
 
- activate the virtual environment
+- Step 3
+ Next, you activate the virtual environment
 
   ```bash```
   source ./env/bin/activate
 
-  Now that you have your virtual environment installed, Install the dependencies
+- Step 4
+ Now that you have your virtual environment installed, Install the dependencies
 
   ```bash
   pip3 install -r requirments.txt
 
-- Step 3
+- Step 5
 
  create a .env file where you define your environment variables for postgres
 
@@ -81,7 +83,7 @@
   ![.env](./img/_env.png)
 
  Surposedly you have created a role with a password and a database, with a shema('exams'). you can now go ahead to test your connection.
- 
+ Now that you have your virtual environment installed, Install the dependencies
  To test your database connection, run the script `test_conn.py`
 
    ```python
