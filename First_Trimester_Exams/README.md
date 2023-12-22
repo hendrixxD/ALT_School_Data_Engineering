@@ -39,7 +39,7 @@
  To clone this repository code, copy and paste the code below. i use ssh, so i am clicking on ssh then C@P the url below
   ![clone](./img/clone.png)
 
- - Step 1
+- Step 1
 
   ```python
   git clone git@github.com:hendrixxD/ALT_School_Data_Engineering.git
@@ -47,41 +47,43 @@
 - Step 2
  Next we create and activate a virtual environment to install all the dependencies
 
- ```python
- python3 venv -m env
+  ```python
+  python3 venv -m env
 
  activate the virtual environment
 
- ```bash
- source ./env/bin/activate
+  ```bash
+  source ./env/bin/activate
 
  Now that you have your virtual environment installed, Install the dependencies
 
- ```bash
- pip3 install -r requirments.txt
+  ```bash
+  pip3 install -r requirments.txt
 
 - Step 3
  create a .env file where you define your environment variables for postgres
 
- ```python
- touch .env
+  ```python
+  touch .env
 
  And put the following lines in it
- ```python
- host={host}                # this by default should be `localhost`
- port=5432                  # unless otherwise, default is 5432
- dbname={name_of_database}  # the name of the database
- user={user}                # the name of the user/role
- password={password}        # user/roles passcode
+
+  ```python
+  host={host}                # this by default should be `localhost`
+  port=5432                  # unless otherwise, default is 5432
+  dbname={name_of_database}  # the name of the database
+  user={user}                # the name of the user/role
+  password={password}        # user/roles passcode
 
  A sample look of how your .env file should look like
+
   ![.env](./img/_env.png)
 
  Surposedly you have created a role with a password and a database, with a shema('exams'). you can now go ahead to test your connection.
  
  To test your database connection, run the script `test_conn.py`
- ```python
- python3 test_conn.py
+   ```python
+   python3 test_conn.py
 
 Congratullations!!! Now that a connection is established, lets deep dive into the code.
 
