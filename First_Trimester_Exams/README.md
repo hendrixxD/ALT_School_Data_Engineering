@@ -52,15 +52,16 @@
 
  activate the virtual environment
 
-  ```bash
+  ```bash```
   source ./env/bin/activate
 
- Now that you have your virtual environment installed, Install the dependencies
+  Now that you have your virtual environment installed, Install the dependencies
 
   ```bash
   pip3 install -r requirments.txt
 
 - Step 3
+
  create a .env file where you define your environment variables for postgres
 
   ```python
@@ -82,6 +83,7 @@
  Surposedly you have created a role with a password and a database, with a shema('exams'). you can now go ahead to test your connection.
  
  To test your database connection, run the script `test_conn.py`
+
    ```python
    python3 test_conn.py
 
