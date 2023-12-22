@@ -45,17 +45,19 @@
 
   ```python
   git clone {url}
+  ```
 
 - Step 2
 
- Next we create and activate a virtual environment to install all the dependencies
+  Next we create and activate a virtual environment to install all the dependencies
 
   ```python
   python3 -m venv env
+  ```
 
 - Step 3
 
- Next, you activate the virtual environment
+  Next, you activate the virtual environment
 
   ```bash
   source ./env/bin/activate
@@ -63,7 +65,7 @@
 
 - Step 4
 
- Now that you have your virtual environment installed, Install the dependencies
+  Now that you have your virtual environment installed, Install the dependencies
 
   ```python
   pip3 install -r requirments.txt
@@ -71,7 +73,7 @@
 
 - Step 5
 
- Create a `.env` file where you define your environment variables for postgres
+  Create a `.env` file where you define your environment variables for postgres
 
   ```python
   touch .env
@@ -79,7 +81,7 @@
 
 - Step 6
 
- Put the following lines in it
+  Put the following lines in it
 
   ```python
   host={host}                # this by default should be `localhost`
@@ -89,9 +91,9 @@
   password={password}        # user/roles passcode
   ```
  
-A sample look of how your `.env` file should look like
+- A sample look of how your `.env` file should look like
 
- ![.env](./img/_env.png ".env file")
+  ![.env](./img/_env.png ".env file")
 
 - Step 7
 
