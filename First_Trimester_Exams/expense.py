@@ -33,8 +33,9 @@ class Expense:
         self.amount = amount
         self.created_at = self._timestamp().isoformat()
         self.updated_at = self._timestamp().isoformat()
-    
-    def update(self, title=None, amount=None):
+        
+        
+    def update(self, title:str=None, amount:float=None):
         """
         - This method allows for updating the `title` and(or) the `amount`
         - By updating the `updated_at` timestamp

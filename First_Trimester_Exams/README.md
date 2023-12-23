@@ -97,9 +97,9 @@
 
 - Step 7
 
- Now you have created a role with a password and a database, with a schema('exams'). you can now go ahead to test your connection.
+  Now you have created a role with a password and a database, with a schema('exams'). you can now go ahead to test your connection.
 
- To test your database connection, run the script `test_conn.py`
+  To test your database connection, run the script `test_conn.py`
 
   ```python
   python3 test_conn.py
@@ -107,7 +107,57 @@
 
 Congratullations!!! Now that a connection is established, lets deep dive into the code.
 
+
 ## How To Run
+
+### Expense
+
+**Creating an Instance of Expense**
+
+To create an individual instance of an expense, `try_expense.py` simulates simultaneously creating a number of instances.
+All you need to is just to adjust the range(1 to infinity).
+
+Have a look at  `try_expense.py`:
+
+  ![main file](./img/try_expense.png)
+
+From the image above, I am only return 3 Expense instances. see the result below.
+
+ ```python
+ python3 try_expense.py
+ ```
+
+  ![Expense instance](./img/result_1.png)
+
+
+**Updating title or amount for an instance**
+
+Using a single instance to test the `update()` method
+
+For the example below:
+
+```python
+Expense(title="House Hold Items", amount=200_000.43)
+```
+
+  ![Expense instance](./img/exp1.png)
+
+Updating the title:
+
+```python
+Expense(title="Housing items", amount=200_000.43)
+```
+
+  ![Expense instance](./img/exp2.png)
+
+Updating the amount:
+
+```python
+Expense(title="Housing items", amount=198000.977)
+```
+
+  ![Expense instance](./img/exp3.png)
+
 
 
 
