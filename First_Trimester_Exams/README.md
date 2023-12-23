@@ -1,3 +1,21 @@
+# Table of Contents
+
+- [Fall Semester Data Engineering Exams](#fall-semester-data-engineering-exams)
+  - [Synopsis](#synopsis)
+  - [Classes](#classes)
+    - [Expense Class](#expense-class)
+    - [ExpenseDB class](#expensedb-class)
+  - [How To Clone](#how-to-clone)
+  - [How To Run](#how-to-run)
+    - [Expense](#expense)
+    - [ExpenseDB](#expensedb)
+      - [Creating Instance[s] of Expense Records: `add_expense()`](#creating-instances-of-expense-records-add_expense)
+      - [Removing an existing expense record[s]: `remove_expense()`](#removing-an-existing-expense-records-remove_expense)
+      - [Retrieves an expense[s] by ID: `get_expense_by_id()`](#retrieves-an-expenses-by-id-get_expense_by_id)
+      - [Retrieves an expense[s] by title: `get_expense_by_title()`](#retrieves-an-expenses-by-title-get_expense_by_title)
+      - [Returns a list of dictionaries representing each expense: `to_dict()`](#returns-a-list-of-dictionaries-representing-each-expense-to_dict)
+
+
 # Fall Semester Data Engineering Exams
 
 ## Synopsis
