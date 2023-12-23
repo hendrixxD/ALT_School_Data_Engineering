@@ -102,14 +102,21 @@ class ExpenseDB:
             expense_id
         )
         
-        result = self.cur.fetchall()
-        for result in results:
-            print(result)
-        
-        # check if record does not exist
+        results = self.cur.fetchall()
+        for expense in results:
+            f_expense = {
+                'id': str(expense[0]),                # Convert UUID to string
+                'title': expense[1],
+                'amount': expense[2],
+                'created_at': expense[3].isoformat(),  # Format datetime
+                'updated_at': expense[4].isoformat(),  # Format datetime
+            }
+            print(f_expense)
+    
+        # check if record exist on database
         id_s = self.cur.execute(
-            """SELECT exams.expense.id
-               FROM exam.expense
+            """SELECT id
+               FROM exams.expense
             """
         )
         
@@ -123,19 +130,9 @@ class ExpenseDB:
     def get_expense_by_title(self, expense_title:str) -> List[tuple]:
         """Retrieves expenses by title
         """
-        # check if record does not exist
-        title = self.cur.execute(
-            """SELECT exams.expense.title
-               FROM exam.expense
-            """
-        )
-        
-        titles = title.fetchall()
-        if expense_title not in titles:
-            print(f"{expense_title} Not In Database")
         
         # actual query
-        self.cur.execute(
+        records = self.cur.execute(
         """
         SELECT *
         FROM exams.expense
@@ -144,10 +141,19 @@ class ExpenseDB:
         expense_title
         )
         
-        results = self.cur.fetchall()
-            
-        expenses = [expense for expense in results]
-        return expenses
+        # check if record does not exist
+        title = self.cur.execute(
+            """SELECT title
+               FROM exams.expense
+            """
+        )
+        
+        titles = title.fetchall()
+        if expense_title not in titles:
+            print(f"{expense_title} Not In Database")
+        
+        results = records.fetchall()
+        return [expense for expense in results]
     
         self.connection.commit()
 
@@ -159,6 +165,7 @@ class ExpenseDB:
         """
         SELECT *
         FROM exams.expense
+        LIMIT 10
         """
         )
         

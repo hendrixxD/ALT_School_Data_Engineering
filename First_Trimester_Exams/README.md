@@ -105,6 +105,10 @@
   python3 test_conn.py
   ```
 
+  You should get the name of your *host*, *port*,  *dbname*, *user* and *password*
+
+  ![expected](./img/expected.png)
+
 Congratullations!!! Now that a connection is established, lets deep dive into the code.
 
 
@@ -142,7 +146,7 @@ Expense(title="House Hold Items", amount=200_000.43)
 
   ![Expense instance](./img/exp1.png)
 
-Updating the title:
+*Updating the title:*
 
 ```python
 Expense(title="Housing items", amount=200_000.43)
@@ -150,7 +154,7 @@ Expense(title="Housing items", amount=200_000.43)
 
   ![Expense instance](./img/exp2.png)
 
-Updating the amount:
+*Updating the amount:*
 
 ```python
 Expense(title="Housing items", amount=198_000.977)
@@ -165,7 +169,7 @@ Expense(title="Housing items", amount=198_000.977)
 
 A single instance can be created or a number of instances can be created simultaneously depending on the the `n` just like explained in the above for *Expense* class
 
-A look of a portion of the main file to test ExpenseDB class methods: `try_expenseDB`
+a portion of the main file to test ExpenseDB class methods: `try_expenseDB`
 
   ![try_expense](./img/n_instances.png)
 
@@ -178,14 +182,41 @@ python3 try_expenseDB.py
   ![try_expense](./img/db1.png)
 
 
-**Removind an existing expense record[s]: `remove_expense()`**
+**Removing an existing expense record[s]: `remove_expense()`**
 
 we currently have 400 expense records. sampling the removal of 350 records simultaneously records
 
   ![removing expenses](./img/remove.png) 
-  And More
+  And More ...
+
+  if an expense record does not exist and it wants to be removed, we check for the existense of its `id` to validate
 
   a view from dbeaver
   ![removing expenses](./img/db2.png)
+
+
+**Retrieves an expense[s] by ID: `get_expense_by_id()`**
+
+From the 50 records left, retrieving 10 expense records:
+ 
+  ![main file](./img/mechanism.png)
+  *where `n` expenses can be retrieved.*
+
+The Returned expenses...
+
+  ![expenses](./img/byid.png)
+
+
+
+**Retrieves an expense[s] by title: `get_expense_by_title()`**
+
+
+
+**Returns a list of dictionaries representing each expense : `to_dict()`**
+
+we will only return a list of 10 records only
+
+  ![to dict](./img/to_dict.png)
+
 
 *The assignment will test your proficiency in defining classes, utilizing class attributes and methods,and handling time-related functionalities.*

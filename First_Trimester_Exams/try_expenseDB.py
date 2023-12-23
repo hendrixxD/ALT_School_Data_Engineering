@@ -62,27 +62,74 @@ def main():
     #     print(f"{err}")
     
     
-    # Sample the remomal of n number of expense by id from the database
-    try:
-        cur.execute(
-            """
-            SELECT exams.expense.id  AS id
-            FROM exams.expense
-            OFFSET 50
-            """
-        )
+    # SAMPLE THE REMOVAL OF N NUMBER OF EXPENSE BY ID FROM THE DATABASE
+    # try:
+    #     cur.execute(
+    #         """
+    #         SELECT exams.expense.id  AS id
+    #         FROM exams.expense
+    #         OFFSET 50
+    #         """
+    #     )
     
-        expense_id = cur.fetchall()
-        # cur.connection.close()    
-        # print(expense_id)
+    #     expense_id = cur.fetchall()
+    #     # cur.connection.close()    
+    #     # print(expense_id)
 
-        for exp_id in expense_id:
-            # expense_id=exp
-            DB.remove_expense(expense_id=exp_id)
-            print(f"{str(exp_id)} removed successfully")
+    #     for exp_id in expense_id:
+    #         # expense_id=exp
+    #         DB.remove_expense(expense_id=exp_id)
+    #         print(f"{str(exp_id)} removed successfully")
+    # except Exception as e:
+    #     print(f"{e}")
+    
+    
+    # # Sample retrieving and expense by id
+    # try:
+    #     cur.execute(
+    #         """
+    #         SELECT id
+    #         FROM exams.expense
+    #         LIMIT 10;
+    #         """
+    #         )
+    
+    #     expense_by_id = cur.fetchall()
+    #     cur.connection.close()
+
+    #     for exp_id in expense_by_id:
+    #         DB.get_expense_by_id(expense_id=exp_id)
+            
+    # except Exception as e:
+    #     print(f"{e}")
+    
+    
+    # Sample retrieving and expenses by title
+    # try:
+    #     cur.execute(
+    #         """
+    #         SELECT title
+    #         FROM exams.expense
+    #         LIMIT 5
+    #         """
+    #         )
+
+    #     expenses_by_title = cur.fetchall()
+
+    #     for exp_title in expenses_by_title:
+    #         DB.get_expense_by_title(expense_title=exp_title)
+            
+    # except Exception as e:
+    #     print(f"{e}")
+    
+    
+    # Sample returning a dict for each expense
+    try:
+        result = DB.to_dict()
+        print(result)
+            
     except Exception as e:
         print(f"{e}")
-    
     
 if __name__=='__main__':
     main()

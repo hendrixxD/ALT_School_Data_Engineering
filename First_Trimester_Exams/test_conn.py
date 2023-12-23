@@ -28,7 +28,8 @@ with connection as conn:
                 )
             """
             )
-        print("Connection successful")
+        print()
+        print("Connection successful!!")
 
 host=os.environ.get('host')
 port=os.environ.get('port')
@@ -36,4 +37,5 @@ dbname=os.environ.get('dbname')
 user=os.environ.get('user')
 password=os.environ.get('password')
 
-print(host, port, dbname, user, password)
+print("Host:", host, "Port:", port, "DBname:", dbname, "User:", user, "Password:", password)
+print()
