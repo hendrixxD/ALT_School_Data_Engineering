@@ -19,7 +19,7 @@ with connection as conn:
         # Execute a command: this creates a new table
         cur.execute(
             """
-            CREATE TABLE exams.testing (
+            CREATE TABLE IF NOT EXISTS exams.testing (
                 id serial,
                 title Varchar(255),
                 amount float,

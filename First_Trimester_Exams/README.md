@@ -153,13 +153,39 @@ Expense(title="Housing items", amount=200_000.43)
 Updating the amount:
 
 ```python
-Expense(title="Housing items", amount=198000.977)
+Expense(title="Housing items", amount=198_000.977)
 ```
 
   ![Expense instance](./img/exp3.png)
 
 
+### ExpenseDB
+
+**Creating Instance[s] of Expense Records: `add_expense()`**
+
+A single instance can be created or a number of instances can be created simultaneously depending on the the `n` just like explained in the above for *Expense* class
+
+A look of a portion of the main file to test ExpenseDB class methods: `try_expenseDB`
+
+  ![try_expense](./img/n_instances.png)
+
+Generating 400 expense records, the command below should do just that for ya.
+
+```python
+python3 try_expenseDB.py
+```
+
+  ![try_expense](./img/db1.png)
 
 
+**Removind an existing expense record[s]: `remove_expense()`**
+
+we currently have 400 expense records. sampling the removal of 350 records simultaneously records
+
+  ![removing expenses](./img/remove.png) 
+  And More
+
+  a view from dbeaver
+  ![removing expenses](./img/db2.png)
 
 *The assignment will test your proficiency in defining classes, utilizing class attributes and methods,and handling time-related functionalities.*

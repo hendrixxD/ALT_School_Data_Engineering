@@ -73,7 +73,25 @@
         print(f"{e}")
 
 
+# Sample returning a dict for each expense
+    try:
+        cur.execute(
+            """
+            SELECT *
+            FROM exams.expense
+            LIMIT 1
+            """
+            )
 
+        expenses = cur.fetchall()
+        cur.connection.close()
+
+        for expense in expenses:
+            result = exp_db.to_dict()
+        print(result)
+            
+    except Exception as e:
+        print(f"{e}")
 
 
 

@@ -13,6 +13,7 @@ load_dotenv()
 
 class ExpenseDB:
     """
+    manages a collection of expenses
     """
     def __init__(self):
         """Initializes a list of Expense Instances
@@ -74,13 +75,14 @@ class ExpenseDB:
             """,
             expense_id
         )
-        
+    
         id_s = self.cur.execute(
             """SELECT exams.expense.id
-               FROM exam.expense
+               FROM exams.expense
             """
         )
         
+        # checks if an id inst in the database
         result = id_s.fetchall()
         if expense_id not in result:
             print(f"{expense_id} Not In Database")

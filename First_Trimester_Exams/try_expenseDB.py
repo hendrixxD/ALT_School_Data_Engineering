@@ -1,5 +1,5 @@
 """
-Samples ExpensDB class methods
+Sample ExpensDB class methods
 """
 import os
 import random
@@ -11,6 +11,7 @@ from expenseDB import ExpenseDB
 
 # initialize faker object
 fake = Faker()
+
 # load environment variables
 load_dotenv()
 
@@ -30,15 +31,17 @@ def generate_fake_expense():
     """
     Generates fake expense data
     """
-    title = fake.company()                 # Generate a fake word for the title
-    amount = random.uniform(20000, 1000_000)   # Generate a random amount between 10 and 1000
+    # Generate a fake word for the title
+    title = fake.company()
+    # Generate a random amount between 10 and 1000
+    amount = random.uniform(20000, 1000_000)
 
     return title, amount
 
 
 def main():
     
-    exp_db = ExpenseDB()
+    DB = ExpenseDB()
     # exp_db.add_expense(title="Data Engineering", amount=200_000)
     
     #title = ["groceries", "school fees", "travel expenses", "house hold"]
@@ -47,32 +50,38 @@ def main():
     #for title, amount in zip(title, amount):
     #    exp1 = exp_db.add_expense(title=title, amount=amount)
     #    print(exp1)
+
     
-    """
-    Generate fake expenses for demonstration
-    """
-
-
-    # Sample returning a dict for each expense
+    # SAMPLES ADDING AN EXPENSE TO A DATABASE
+    # try:
+    #     for _ in range(400):
+    #         title, amount = generate_fake_expense()
+    #         exp = DB.add_expense(title=title, amount=f"{amount:.2f}")
+    #     print(f"{_} Records added to database successfully")
+    # except Exception as err:
+    #     print(f"{err}")
+    
+    
+    # Sample the remomal of n number of expense by id from the database
     try:
         cur.execute(
             """
-            SELECT *
+            SELECT exams.expense.id  AS id
             FROM exams.expense
-            LIMIT 1
+            OFFSET 50
             """
-            )
+        )
+    
+        expense_id = cur.fetchall()
+        # cur.connection.close()    
+        # print(expense_id)
 
-        expenses = cur.fetchall()
-        cur.connection.close()
-
-        for expense in expenses:
-            result = exp_db.to_dict()
-        print(result)
-            
+        for exp_id in expense_id:
+            # expense_id=exp
+            DB.remove_expense(expense_id=exp_id)
+            print(f"{str(exp_id)} removed successfully")
     except Exception as e:
         print(f"{e}")
-
     
     
 if __name__=='__main__':
