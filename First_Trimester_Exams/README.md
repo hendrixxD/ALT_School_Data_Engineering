@@ -219,6 +219,7 @@ we currently have 400 expense records. sampling the removal of 350 records simul
 From the 50 records left, retrieving 10 expense records:
  
   ![main file](./img/mechanism.png)
+
   *where `n` expenses can be retrieved.*
 
 The Returned expenses...
@@ -231,7 +232,7 @@ The Returned expenses...
 
 Retrieving 5 expense Record:
 
-  ![expenses](./img/_bytitle.png)
+  ![expenses](./img/_btitle.png)
 
 
 **Returns a list of dictionaries representing each expense : `to_dict()`**
