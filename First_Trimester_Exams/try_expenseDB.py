@@ -53,44 +53,47 @@ def main():
 
     
     # SAMPLES ADDING AN EXPENSE TO A DATABASE
+    # print("Now Adding Records to Database...")
+    
     # try:
-    #     for _ in range(400):
+    #     for _ in range(20):
     #         title, amount = generate_fake_expense()
     #         exp = DB.add_expense(title=title, amount=f"{amount:.2f}")
     #     print(f"{_} Records added to database successfully")
     # except Exception as err:
     #     print(f"{err}")
     
-    
-    # SAMPLE THE REMOVAL OF N NUMBER OF EXPENSE BY ID FROM THE DATABASE
-    # try:
-    #     cur.execute(
-    #         """
-    #         SELECT exams.expense.id  AS id
-    #         FROM exams.expense
-    #         OFFSET 50
-    #         """
-    #     )
-    
-    #     expense_id = cur.fetchall()
-    #     # cur.connection.close()    
-    #     # print(expense_id)
-
-    #     for exp_id in expense_id:
-    #         # expense_id=exp
-    #         DB.remove_expense(expense_id=exp_id)
-    #         print(f"{str(exp_id)} removed successfully")
-    # except Exception as e:
-    #     print(f"{e}")
+    # print("Done Adding Records to Database")
+    # print()
     
     
-    # # Sample retrieving and expense by id
+    # SAMPLE THE REMOVAL OF n NUMBER OF EXPENSE BY ID FROM THE DATABASE
     # try:
     #     cur.execute(
     #         """
     #         SELECT id
     #         FROM exams.expense
-    #         LIMIT 10;
+    #         LIMIT 5;
+    #         """
+    #     )
+    
+    #     expense_id = cur.fetchall()
+
+    #     for exp_id in expense_id:
+    #         DB.remove_expense(expense_id=exp_id)
+    #         print(f"{str(exp_id)} removed successfully")
+    # except Exception as e:
+    #     print(f"{e}")
+    # print()
+    
+    
+    # print("Now Retrieving records by ID...")
+    # Sample retrieving and expense by id
+    # try:
+    #     cur.execute(
+    #         """
+    #         SELECT id
+    #         FROM exams.expense
     #         """
     #         )
     
@@ -103,26 +106,35 @@ def main():
     # except Exception as e:
     #     print(f"{e}")
     
+    # print("Done Retrieving records by ID from database")
+    # print()
     
-    # Sample retrieving and expenses by title
-    # try:
-    #     cur.execute(
-    #         """
-    #         SELECT title
-    #         FROM exams.expense
-    #         LIMIT 5
-    #         """
-    #         )
+    
+    print("Retrieving records by title from database")
+    # # Sample retrieving and expenses by title
+    try:
+        cur.execute(
+            """
+            SELECT title
+            FROM exams.expense
+            LIMIT 5;
+            """
+            )
 
-    #     expenses_by_title = cur.fetchall()
+        expenses_by_title = cur.fetchall()
 
-    #     for exp_title in expenses_by_title:
-    #         DB.get_expense_by_title(expense_title=exp_title)
+        for exp_title in expenses_by_title:
+            res = DB.get_expense_by_title(expense_title=exp_title)
+            print(res)
             
-    # except Exception as e:
-    #     print(f"{e}")
+    except Exception as e:
+        print(f"{e}")
+    
+    print("Done Retrieving Records by title from database")
+    print()
     
     
+    print("returning records..")
     # Sample returning a dict for each expense
     try:
         result = DB.to_dict()
@@ -130,6 +142,7 @@ def main():
             
     except Exception as e:
         print(f"{e}")
+    print("Done!")
     
 if __name__=='__main__':
     main()

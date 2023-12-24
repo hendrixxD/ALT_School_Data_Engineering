@@ -14,6 +14,7 @@
       - [Retrieves an expense[s] by ID: `get_expense_by_id()`](#retrieves-an-expenses-by-id-get_expense_by_id)
       - [Retrieves an expense[s] by title: `get_expense_by_title()`](#retrieves-an-expenses-by-title-get_expense_by_title)
       - [Returns a list of dictionaries representing each expense: `to_dict()`](#returns-a-list-of-dictionaries-representing-each-expense-to_dict)
+  - [Conclusion](#conclusion)
 
 
 # Fall Semester Data Engineering Exams
@@ -152,7 +153,7 @@ From the image above, I am only return 3 Expense instances. see the result below
   ![Expense instance](./img/result_1.png)
 
 
-**Updating title or amount for an instance**
+**Updating title or amount for an instance: `update()`**
 
 Using a single instance to test the `update()` method
 
@@ -228,6 +229,9 @@ The Returned expenses...
 
 **Retrieves an expense[s] by title: `get_expense_by_title()`**
 
+Retrieving 5 expense Record:
+
+  ![expenses](./img/_bytitle.png)
 
 
 **Returns a list of dictionaries representing each expense : `to_dict()`**
@@ -236,5 +240,8 @@ we will only return a list of 10 records only
 
   ![to dict](./img/to_dict.png)
 
+## Conclusion
+
+`try_expense.py` and `try_expennseDB.py` contains all needed to run and test the class methods.
 
 *The assignment will test your proficiency in defining classes, utilizing class attributes and methods,and handling time-related functionalities.*

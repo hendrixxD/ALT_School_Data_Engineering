@@ -1,7 +1,7 @@
 import os
 import uuid
 import psycopg
-from typing import List, Dict
+from typing import List, Dict, Any
 from dotenv import load_dotenv
 from datetime import datetime, timezone
 
@@ -25,6 +25,8 @@ class ExpenseDB:
         # expenses list
         self.expenses:List  = []
         
+        # Initialize database connection and cursor as context managers
+        # Initialize database connection and cursor
         self.connection = psycopg.connect(
             host=os.environ.get('host'),
             port=os.environ.get('port'),
@@ -32,9 +34,25 @@ class ExpenseDB:
             user=os.environ.get('user'),
             password=os.environ.get('password')
         )
+        self.cur = self.connection.cursor() # cursor_factory=psycopg.RealDictCursor
 
-        # creates a cursor for execution of sql queries
-        self.cur = self.connection.cursor()
+        # Create table if not exists
+        self.initialize_table()
+    
+    
+    # Create table
+    def initialize_table(self):
+        self.cur.execute(
+            """
+            CREATE TABLE IF NOT EXISTS exams.expense (
+                id UUID,
+                title VARCHAR(255),
+                amount FLOAT,
+                created_at TIMESTAMP,
+                updated_at TIMESTAMP
+            );
+            """
+        )
     
     
     def add_expense(self, title:str, amount:float):
@@ -43,16 +61,16 @@ class ExpenseDB:
         expense = Expense(title, amount)
         self.expenses.append(expense)
         
-        self.cur.execute(
-            """
-            CREATE TABLE IF NOT EXISTS exams.expense (
-                id UUID,
-                title VARCHAR(255),
-                amount FLOAT,
-                created_at TIMESTAMP,
-                updated_at TIMESTAMP);
-            """
+        # Reconnect if the connection is closed
+        if self.connection.closed:
+            self.connection = psycopg.connect(
+                host=os.environ.get('host'),
+                port=os.environ.get('port'),
+                dbname=os.environ.get('dbname'),
+                user=os.environ.get('user'),
+                password=os.environ.get('password')
             )
+            self.cur = self.connection.cursor()
         
         self.cur.execute(
             """    
@@ -78,7 +96,7 @@ class ExpenseDB:
     
         id_s = self.cur.execute(
             """SELECT exams.expense.id
-               FROM exams.expense
+               FROM exams.expense;
             """
         )
         
@@ -116,57 +134,59 @@ class ExpenseDB:
         # check if record exist on database
         id_s = self.cur.execute(
             """SELECT id
-               FROM exams.expense
+               FROM exams.expense;
             """
         )
         
         ID = id_s.fetchall()
-        if expense_id not in ID:
+        if expense_id not in [str(id_) for id_ in ID]:
             print(f"{expense_id} Not In Database")
         
         self.connection.commit()
     
     
-    def get_expense_by_title(self, expense_title:str) -> List[tuple]:
+    def get_expense_by_title(self, expense_title) -> List[Dict]:
         """Retrieves expenses by title
-        """
+        """ 
         
         # actual query
-        records = self.cur.execute(
-        """
-        SELECT *
-        FROM exams.expense
-        WHERE exams.expense.title = %s
-        """,
-        expense_title
-        )
-        
-        # check if record does not exist
-        title = self.cur.execute(
-            """SELECT title
-               FROM exams.expense
+        self.cur.execute(
             """
+            SELECT *
+            FROM exams.expense
+            WHERE title = %s;
+            """,
+            expense_title
         )
         
-        titles = title.fetchall()
-        if expense_title not in titles:
-            print(f"{expense_title} Not In Database")
+        results = self.cur.fetchall()
         
-        results = records.fetchall()
-        return [expense for expense in results]
-    
-        self.connection.commit()
+        expenses = [
+            {
+                'id': str(result[0]),                # Convert UUID to string
+                'amount': result[2],
+                'created_at': result[3].isoformat(),  # Format datetime
+                'updated_at': result[4].isoformat(),  # Format datetime
+            }
+            for result in results
+            ]
+        
+        # Check if records exist
+        if not results:
+            print(f"No records found with title: {expense_title}")
+        
+        return expenses
 
 
     def to_dict(self) -> List[Dict]:
         """returns a list of dictionaries representing each expense in the database
         """
         self.cur.execute(
-        """
-        SELECT *
-        FROM exams.expense
-        LIMIT 10
-        """
+            """
+            SELECT *
+            FROM exams.expense
+            LIMIT 10
+            """
         )
         
         self.connection.commit()
@@ -188,6 +208,3 @@ class ExpenseDB:
         # re-save the expsenses data to the self.expsenses list after all the operations
         for instance in instances:
             self.expenses.append(expense)
-    
-    #self.cur.close()
-    #self.connection.close()
