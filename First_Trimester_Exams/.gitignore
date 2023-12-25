@@ -7,3 +7,4 @@ ExpenseDatabase.py
 Psycopg3
 __pycache__/
 inputs.py
+try_expenseDB

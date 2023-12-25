@@ -7,7 +7,7 @@ import psycopg
 from faker import Faker
 from dotenv import load_dotenv
 from expense import Expense
-from expenseDB import ExpenseDB
+from expenseDatabase import ExpenseDatabase
 
 # initialize faker object
 fake = Faker()
@@ -41,7 +41,7 @@ def generate_fake_expense():
 
 def main():
     
-    DB = ExpenseDB()
+    DB = ExpenseDatabase()
     # exp_db.add_expense(title="Data Engineering", amount=200_000)
     
     #title = ["groceries", "school fees", "travel expenses", "house hold"]
@@ -53,61 +53,61 @@ def main():
 
     
     # SAMPLES ADDING AN EXPENSE TO A DATABASE
-    # print("Now Adding Records to Database...")
+    print("Now Adding Records to Database...")
     
-    # try:
-    #     for _ in range(20):
-    #         title, amount = generate_fake_expense()
-    #         exp = DB.add_expense(title=title, amount=f"{amount:.2f}")
-    #     print(f"{_} Records added to database successfully")
-    # except Exception as err:
-    #     print(f"{err}")
+    try:
+        for _ in range(20):
+            title, amount = generate_fake_expense()
+            exp = DB.add_expense(title=title, amount=f"{amount:.2f}")
+        print(f"{_} Records added to database successfully")
+    except Exception as err:
+        print(f"{err}")
     
-    # print("Done Adding Records to Database")
-    # print()
+    print("Done Adding Records to Database")
+    print()
     
     
     # SAMPLE THE REMOVAL OF n NUMBER OF EXPENSE BY ID FROM THE DATABASE
-    # try:
-    #     cur.execute(
-    #         """
-    #         SELECT id
-    #         FROM exams.expense
-    #         LIMIT 5;
-    #         """
-    #     )
+    try:
+        cur.execute(
+            """
+            SELECT id
+            FROM exams.expense
+            LIMIT 5;
+            """
+        )
     
-    #     expense_id = cur.fetchall()
+        expense_id = cur.fetchall()
 
-    #     for exp_id in expense_id:
-    #         DB.remove_expense(expense_id=exp_id)
-    #         print(f"{str(exp_id)} removed successfully")
-    # except Exception as e:
-    #     print(f"{e}")
-    # print()
+        for exp_id in expense_id:
+            DB.remove_expense(expense_id=exp_id)
+            print(f"{str(exp_id)} removed successfully")
+    except Exception as e:
+        print(f"{e}")
+    print()
     
     
-    # print("Now Retrieving records by ID...")
+    print("Now Retrieving records by ID...")
     # Sample retrieving and expense by id
-    # try:
-    #     cur.execute(
-    #         """
-    #         SELECT id
-    #         FROM exams.expense
-    #         """
-    #         )
+    try:
+        cur.execute(
+            """
+            SELECT id
+            FROM exams.expense
+            """
+        )
     
-    #     expense_by_id = cur.fetchall()
-    #     cur.connection.close()
+        expense_by_id = cur.fetchall()
+        cur.connection.close()
 
-    #     for exp_id in expense_by_id:
-    #         DB.get_expense_by_id(expense_id=exp_id)
+        for exp_id in expense_by_id:
+            DB.get_expense_by_id(expense_id=exp_id)
             
-    # except Exception as e:
-    #     print(f"{e}")
+    except Exception as e:
+        print(f"{e}")
     
-    # print("Done Retrieving records by ID from database")
-    # print()
+    print("Done Retrieving records by ID from database")
+    print()
     
     
     print("Retrieving records by title from database")
@@ -143,6 +143,11 @@ def main():
     except Exception as e:
         print(f"{e}")
     print("Done!")
+    
+    
+    # close connection
+    close_connection()
+
     
 if __name__=='__main__':
     main()

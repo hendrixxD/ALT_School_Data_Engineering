@@ -11,7 +11,7 @@ from expense import Expense
 load_dotenv()
 
 
-class ExpenseDB:
+class ExpenseDatabase:
     """
     manages a collection of expenses
     """
@@ -22,8 +22,8 @@ class ExpenseDB:
         Attributes:
             expense(list): a list to store Expense objects
         """
-        # expenses list
-        self.expenses:List  = []
+        # expenses object list
+        self.expenses: List[Expense] = []
         
         # Initialize database connection and cursor as context managers
         # Initialize database connection and cursor
@@ -100,11 +100,14 @@ class ExpenseDB:
             """
         )
         
-        # checks if an id inst in the database
-        result = id_s.fetchall()
-        if expense_id not in result:
+        # checks if an id exists in the database
+        ID = id_s.fetchall()
+        if expense_id not in [str(id_) for id_ in ID]:
             print(f"{expense_id} Not In Database")
-            
+        
+        # Remove from the list
+        self.expenses = [expense for expense in self.expenses if str(expense.id) != expense_id]
+        
         self.connection.commit()
     
     
@@ -121,9 +124,10 @@ class ExpenseDB:
         )
         
         results = self.cur.fetchall()
+        
         for expense in results:
             f_expense = {
-                'id': str(expense[0]),                # Convert UUID to string
+                'id': str(expense[0]),                 # Convert UUID to string
                 'title': expense[1],
                 'amount': expense[2],
                 'created_at': expense[3].isoformat(),  # Format datetime
@@ -189,8 +193,6 @@ class ExpenseDB:
             """
         )
         
-        self.connection.commit()
-        
         instances = self.cur.fetchall()
         
         expenses = [
@@ -207,4 +209,12 @@ class ExpenseDB:
 
         # re-save the expsenses data to the self.expsenses list after all the operations
         for instance in instances:
-            self.expenses.append(expense)
+            self.expenses.update(expense)
+        
+    
+    def close_connection(self):
+        """Closes the database connection and cursor"""
+        if not self.connection.closed:
+            self.connection.close()
+        if not self.cur.closed:
+            self.cur.close()
